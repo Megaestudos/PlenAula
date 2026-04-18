@@ -28,7 +28,10 @@ async function checkSubscription(user) {
       
       // Setup User Name globally if in app
       const userNameEl = document.getElementById('profileUserName');
-      if(userNameEl) userNameEl.innerText = data.displayName || 'Recruta';
+      if(userNameEl) {
+         let rawName = data.displayName || 'Recruta';
+         userNameEl.innerText = rawName.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+      }
       
       if (data.plan === 'free') {
         const endDate = new Date(data.trialEnd);
