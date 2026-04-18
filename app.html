@@ -15,10 +15,6 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 
-<body>
-  <div class="app-timer-bar" id="timerContainer">
-    <i class="ph-fill ph-clock"></i> <span id="timerText">Calculando tempo de acesso...</span>
-  </div>
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
 
@@ -34,6 +30,9 @@
         </div>
       </div>
       <div class="controls">
+        <div class="app-timer-bar" id="timerContainer">
+          <i class="ph-fill ph-clock"></i> <span id="timerText">Calculando...</span>
+        </div>
         <button class="icon-btn" id="logoutBtn" title="Sair" onclick="logoutUser()"><i class="ph ph-sign-out"></i></button>
         <div class="scale-controls">
           <button class="icon-btn" id="scaleDownBtn" title="Diminuir"><i class="ph ph-minus"></i></button>
