@@ -19,18 +19,24 @@ window.showPage = window.go = function(id) {
      btn.classList.toggle('active', btn.getAttribute('data-target') === id);
   });
 
-  // Gatilhos extras se necessário
-  if(id === 'home') {
+  // Foco no simulado
+  if(id === 'quiz' && quizStarted) document.body.classList.add('quiz-focus');
+  else document.body.classList.remove('quiz-focus');
+
+  // Gatilhos extras de carregamento
+  if (id === 'home' || id === 'dashboard') {
+     showBestRecord();
      updateXPUI();
      checkStreak();
      if(typeof renderBadges === 'function') renderBadges();
+     if(typeof renderStatsChart === 'function') renderStatsChart();
   }
   if(id === 'study') renderStudies();
   if(id === 'cards') renderCards();
-  if(id === 'stats') renderStatsChart();
+  if(id === 'quiz' && !quizStarted) showTopicSelection();
   
   // Scroll para o topo
-  window.scrollTo(0,0);
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function checkStreak() {
@@ -158,28 +164,7 @@ document.getElementById('soundToggle').onclick = function() {
 if (localStorage.getItem(SOUND_KEY) === null) localStorage.setItem(SOUND_KEY, '1');
 updateSoundUI();
 
-window.go = function(target){
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(target).classList.add('active');
-  document.querySelectorAll('.tabbtn').forEach(b => b.classList.toggle('active', b.dataset.target === target));
-  
-  if(target === 'quiz' && quizStarted) document.body.classList.add('quiz-focus');
-  else document.body.classList.remove('quiz-focus');
-
-  window.scrollTo({top: 0, behavior: 'smooth'});
-  if (target === 'home') {
-    showBestRecord();
-  }
-  if (target === 'dashboard') {
-    if(typeof renderBadges === 'function') renderBadges();
-    if(typeof renderStatsChart === 'function') renderStatsChart();
-  }
-  checkStreak();
-  updateXPUI();
-  if (target === 'study') renderStudies();
-  if (target === 'cards') renderCards();
-  if (target === 'quiz' && !quizStarted) showTopicSelection();
-};
+// Função removida por ser duplicata (agora unificada no topo)
 
 function linkify(text) {
   const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
@@ -229,30 +214,35 @@ async function showTopicSelection(){
     const select = document.getElementById('topicSelect');
     if (!select) return;
     
-    select.innerHTML = '<option value="Todos">Todas as Matérias</option>';
+    select.innerHTML = '<option value="">Carregando tópicos...</option>';
 
     try {
-      // Simplificando a query para evitar a necessidade de criar índices manuais no Firebase
-      const snap = await getFirestoreDb().collection('materias').get();
+      const db = getFirestoreDb();
+      const snap = await db.collection('materias').get();
+      
+      select.innerHTML = '<option value="Todos">Todas as Matérias</option>';
       
       let materias = [];
       snap.forEach(doc => {
         const d = doc.data();
-        if (d.ativo !== false) { // Mostra se for true ou se o campo não existir
+        if (d.ativo !== false) {
           materias.push({ nome: d.nome, ordem: d.ordem || 99 });
         }
       });
 
-      // Ordenação manual no JavaScript (mais seguro que índice do Firebase)
       materias.sort((a, b) => a.ordem - b.ordem);
 
       materias.forEach(m => {
         const nome = (m.nome || '').toString().trim();
         if (nome) select.innerHTML += `<option value="${nome}">${nome}</option>`;
       });
+
+      if (materias.length === 0) {
+          log("Aviso: Nenhuma matéria encontrada no banco.", "warning");
+      }
     } catch (err) {
       console.error("Erro ao carregar tópicos:", err);
-      log("Erro ao carregar tópicos do banco de dados.", "error");
+      select.innerHTML = '<option value="Todos">Todas as Matérias (Erro ao Carregar)</option>';
     }
   } catch (e) {}
 }
