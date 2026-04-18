@@ -82,7 +82,7 @@ function startCountdown(endDate) {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
-    timerText.innerText = `Acesso grátis expira em: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    timerText.innerText = `${days}d ${hours}h ${minutes}m`;
   }, 1000);
 }
 
