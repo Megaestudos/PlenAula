@@ -1,10 +1,11 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyB36ZszS8v_DeOn3at7zEo_tFq86WU0sI4",
-  authDomain: "simulados-concursos-22c91.firebaseapp.com",
-  projectId: "simulados-concursos-22c91",
-  storageBucket: "simulados-concursos-22c91.firebasestorage.app",
-  messagingSenderId: "863699339166",
-  appId: "1:863699339166:web:8514155da2229b41ae388f"
+  apiKey: "AIzaSyDXBrNIPfIBAkom9fafCorwhUw1FQ9nSCg",
+  authDomain: "plenaula-concursos.firebaseapp.com",
+  projectId: "plenaula-concursos",
+  storageBucket: "plenaula-concursos.firebasestorage.app",
+  messagingSenderId: "433280443325",
+  appId: "1:433280443325:web:8ed2a8bea4b3e4d6d9a8d4",
+  measurementId: "G-908KRQCKS8"
 };
 
 if (!firebase.apps.length) {
