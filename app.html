@@ -75,9 +75,9 @@
           <button class="btn btn-primary" onclick="go('cards')">
             <i class="ph ph-cards"></i> <span>Flashcards</span>
           </button>
-          <a href="./resumos/" class="btn btn-primary">
+          <button class="btn btn-primary" onclick="go('resumos')">
             <i class="ph ph-file-text"></i> <span>Resumos</span>
-          </a>
+          </button>
           <button class="btn btn-primary" onclick="go('dashboard')" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
             <i class="ph ph-chart-line-up"></i> <span>Desempenho</span>
           </button>
@@ -110,12 +110,12 @@
         </div>
       </section>
 
-      <section id="study" class="page card">
+      <section id="resumos" class="page card">
         <div class="page-top-bar">
-          <h3 class="page-title"><i class="ph ph-books"></i> Conteúdos</h3>
+          <h3 class="page-title"><i class="ph ph-file-text"></i> Resumos Premium</h3>
           <button class="btn-sm" onclick="go('home')"><i class="ph ph-arrow-left"></i> Voltar</button>
         </div>
-        <div id="studyList" class="study-list">Carregando conteúdos...</div>
+        <div id="studyList" class="study-grid">Carregando conteúdos...</div>
       </section>
 
       <section id="quiz" class="page card">
@@ -197,7 +197,7 @@
       <i class="ph ph-house"></i>
       <span>Início</span>
     </button>
-    <button class="tabbtn" data-target="study" onclick="go('study')">
+    <button class="tabbtn" data-target="resumos" onclick="go('resumos')">
       <i class="ph ph-book-open"></i>
       <span>Estudo</span>
     </button>
