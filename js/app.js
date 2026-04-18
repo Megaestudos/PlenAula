@@ -31,7 +31,7 @@ window.showPage = window.go = function(id) {
      if(typeof renderBadges === 'function') renderBadges();
      if(typeof renderStatsChart === 'function') renderStatsChart();
   }
-  if(id === 'study') renderStudies();
+  if(id === 'resumos' || id === 'study') renderStudies();
   if(id === 'cards') renderCards();
   if(id === 'quiz' && !quizStarted) showTopicSelection();
   
@@ -173,24 +173,45 @@ function linkify(text) {
 
 async function renderStudies(){
   const container = document.getElementById('studyList');
-  container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted)"><i class="ph ph-spinner-gap ph-spin" style="font-size:24px;"></i><br><br>Carregando conteúdos...</div>';
+  if(!container) return;
+  
+  container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted)"><i class="ph ph-spinner-gap ph-spin" style="font-size:24px;"></i><br><br>Carregando resumos...</div>';
+  
+  const GITHUB_BASE = 'https://megaestudos.github.io/PlenAula/Resumos/';
+  const files = [
+    { name: 'Direito Constitucional', file: 'direito-constitucional.html', icon: 'ph-book-open' },
+    { name: 'Direito Administrativo', file: 'direito-administrativo.html', icon: 'ph-scales' },
+    { name: 'Código Penal', file: 'codigo-penal.html', icon: 'ph-gavel' },
+    { name: 'Lei Maria da Penha', file: 'maria-da-penha.html', icon: 'ph-gender-female' },
+    { name: 'Estatuto da Criança (ECA)', file: 'estatuto-da-criança-e-do-adolescente.html', icon: 'ph-baby' },
+    { name: 'Lei de Drogas', file: 'lei-de-drogas.html', icon: 'ph-pills' },
+    { name: 'Abuso de Autoridade', file: 'abuso-de-autoridade.html', icon: 'ph-shield-warning' },
+    { name: 'Crimes Hediondos', file: 'crimes-hediondos.html', icon: 'ph-warning-diamond' },
+    { name: 'Crimes Ambientais', file: 'crimes-ambientais.html', icon: 'ph-tree' },
+    { name: 'Crimes de Tortura', file: 'crimes-de-tortura.html', icon: 'ph-hand-palm' },
+    { name: 'Crimes de Preconceito', file: 'crimes-preconceito-raça-cor.html', icon: 'ph-users-three' },
+    { name: 'Procedimentos Penais', file: 'procedimentos-penais.html', icon: 'ph-files' }
+  ];
+
   try {
-    const snap = await getFirestoreDb().collection('studies').where('ativo', '==', true).get();
-    
-    if (!snap.empty){
-      container.innerHTML = '';
-      snap.forEach(doc => {
-        const s = doc.data();
-        const d = document.createElement('details'); d.className = 'summary';
-        d.innerHTML = `<summary>${s.topico || 'Tópico'}</summary><div class="study-content">${linkify(s.conteudo || '')}</div>`;
-        container.appendChild(d);
-      });
-    } else {
-      container.innerHTML = '<div style="text-align:center; padding:20px;"><i class="ph ph-empty"></i><br>Nenhum conteúdo encontrado no banco de dados.</div>';
-    }
+    container.innerHTML = '';
+    files.forEach(f => {
+      const card = document.createElement('div');
+      card.className = 'resumo-card';
+      card.innerHTML = `
+        <div class="resumo-icon"><i class="ph-fill ${f.icon}"></i></div>
+        <div class="resumo-info">
+          <h4>${f.name}</h4>
+          <p>Material de Apoio Digital</p>
+        </div>
+        <div class="resumo-action"><i class="ph ph-arrow-right"></i></div>
+      `;
+      card.onclick = () => window.open(GITHUB_BASE + f.file, '_blank');
+      container.appendChild(card);
+    });
   } catch (e) { 
     console.error(e);
-    container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--danger)">Erro ao carregar dados do Firestore.</div>'; 
+    container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--danger)">Erro ao carregar a lista de resumos.</div>'; 
   }
 }
 
