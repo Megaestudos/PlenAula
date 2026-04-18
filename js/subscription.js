@@ -83,6 +83,12 @@ function startCountdown(endDate) {
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
     timerText.innerText = `${days}d ${hours}h ${minutes}m`;
+    
+    // Smooth insertion on mobile into existing text instead of giant badge
+    const welcomeSubtitle = document.getElementById('welcomeSubtitle');
+    if (welcomeSubtitle && window.innerWidth <= 600) {
+        welcomeSubtitle.innerHTML = `O teste Vip expira em <strong style="color:var(--danger)">${days}d e ${hours}h</strong>. Bons estudos:`;
+    }
   }, 1000);
 }
 
