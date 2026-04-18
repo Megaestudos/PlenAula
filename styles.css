@@ -277,7 +277,7 @@ button.opt.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: 
 .hero-badge { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: var(--primary); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 6px; }
 .hero-title { font-size: clamp(36px, 5vw, 64px); font-weight: 900; line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
 .hero-title span { color: var(--primary); }
-.hero-subtitle { font-size: 18px; color: var(--text-muted); max-width: 600px; line-height: 1.6; margin-bottom: 40px; }
+.hero-subtitle { font-size: 18px; color: var(--text-muted); max-width: 600px; line-height: 1.6; margin-bottom: 40px; margin-left: auto; margin-right: auto; text-align: center; }
 .hero-cta-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .btn-lg { padding: 18px 32px; font-size: 18px; border-radius: 16px; }
 .cta-hint { font-size: 13px; color: var(--text-muted); }
@@ -338,3 +338,21 @@ button.opt.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: 
 
 /* Profile display on app header */
 .profile-user-name { font-size: 14px; font-weight: 600; color: var(--text-muted); display: block; margin-top: 4px; }
+
+/* --- LOGIN MODAL --- */
+.login-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.login-modal-overlay.show { opacity: 1; pointer-events: auto; }
+.login-modal-card { background: white; color: #333; padding: 40px; border-radius: 12px; width: 90%; max-width: 400px; position: relative; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center; }
+.login-close-btn { position: absolute; top: 15px; right: 15px; background: transparent; border: none; font-size: 20px; cursor: pointer; color: #999; }
+.login-badge-icon { margin: 0 auto 10px; width: 50px; height: 50px; background: #fef2f2; color: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.login-modal-card h2 { font-size: 20px; font-weight: 600; line-height: 1.4; margin-bottom: 10px; color: #111; }
+.btn-facebook { background: #1877F2; color: white; display:flex; justify-content:center; align-items:center; gap:10px; border-radius: 6px; padding: 10px; border:none; font-weight: 600; cursor:pointer;}
+.btn-google { background: white; color: #555; border: 1px solid #ddd; display:flex; justify-content:center; align-items:center; gap:10px; border-radius: 6px; padding: 10px; font-weight: 600; cursor:pointer;}
+.login-form { text-align: left; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.login-form label { font-size: 13px; font-weight: 600; color: #333; }
+.login-form input { padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline:none; background: #fff; color:#333; }
+.login-form input::placeholder { color: #aaa; }
+.input-pass { position: relative; display: flex; align-items: center; width: 100%; }
+.input-pass input { width: 100%; padding-right: 80px; }
+.btn-show-pass { position: absolute; right: 10px; background: none; border: none; font-size: 12px; color: #777; display: flex; align-items: center; gap:4px; cursor:pointer; }
+.forgot-link { color: #1877F2; text-decoration: none; font-size: 13px; font-weight: 600; margin-top: 15px; }
