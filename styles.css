@@ -228,9 +228,13 @@ button.opt.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: 
 @media (max-width: 600px) {
   body { padding-top: env(safe-area-inset-top); }
   .app { margin-top: 0; gap: 16px; }
-  .card { padding: 20px; border-radius: 20px; }
+  .card { padding: 16px; border-radius: 20px; }
   .header { padding: 16px; }
-  .scale-controls { display:none; }
+  .controls > .icon-btn { display: none !important; }
+  .scale-controls { display: none !important; }
+  .title { font-size: 18px; }
+  .subtitle { font-size: 12px; }
+  .app-timer-bar { padding: 6px 12px; font-size: 12px; }
   .deck { width: 100%; }
 }
 
@@ -334,7 +338,7 @@ button.opt.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: 
 .btn-pay { background: linear-gradient(135deg, #10B981 0%, #059669 100%); width: 100%; padding: 18px; font-size: 18px; box-shadow: 0 4px 15px rgba(16,185,129,0.3); border: none; color: white; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
 .btn-pay:hover { box-shadow: 0 6px 20px rgba(16,185,129,0.5); transform: translateY(-2px); }
 
-.app-timer-bar { background: linear-gradient(90deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.25) 100%); border: 1px solid rgba(239, 68, 68, 0.3); padding: 8px 24px; border-radius: 30px; text-align: center; color: #fca5a5; font-weight: 600; font-size: 13px; display: none; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.2); backdrop-filter: blur(10px); margin: 20px auto 0; width: fit-content; position: relative; z-index: 101; }
+.app-timer-bar { background: linear-gradient(90deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.25) 100%); border: 1px solid rgba(239, 68, 68, 0.3); padding: 8px 16px; border-radius: 30px; color: #fca5a5; font-weight: 700; font-size: 13px; display: none; align-items: center; gap: 6px; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.15); backdrop-filter: blur(5px); white-space: nowrap; }
 .app-timer-bar i { font-size: 16px; color: #ef4444; }
 .app-timer-bar span { letter-spacing: 0.5px; }
 
