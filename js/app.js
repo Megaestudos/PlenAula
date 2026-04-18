@@ -226,13 +226,34 @@ async function showTopicSelection(){
       motivacionalEl.innerText = motivacionais[Math.floor(Math.random() * motivacionais.length)];
     }
 
-    const snap = await getFirestoreDb().collection('materias').where('ativo', '==', true).orderBy('ordem', 'asc').get();
     const select = document.getElementById('topicSelect');
+    if (!select) return;
+    
     select.innerHTML = '<option value="Todos">Todas as Matérias</option>';
-    snap.forEach(doc => {
-      const nome = (doc.data().nome || '').toString().trim();
-      if (nome) select.innerHTML += `<option value="${nome}">${nome}</option>`;
-    });
+
+    try {
+      // Simplificando a query para evitar a necessidade de criar índices manuais no Firebase
+      const snap = await getFirestoreDb().collection('materias').get();
+      
+      let materias = [];
+      snap.forEach(doc => {
+        const d = doc.data();
+        if (d.ativo !== false) { // Mostra se for true ou se o campo não existir
+          materias.push({ nome: d.nome, ordem: d.ordem || 99 });
+        }
+      });
+
+      // Ordenação manual no JavaScript (mais seguro que índice do Firebase)
+      materias.sort((a, b) => a.ordem - b.ordem);
+
+      materias.forEach(m => {
+        const nome = (m.nome || '').toString().trim();
+        if (nome) select.innerHTML += `<option value="${nome}">${nome}</option>`;
+      });
+    } catch (err) {
+      console.error("Erro ao carregar tópicos:", err);
+      log("Erro ao carregar tópicos do banco de dados.", "error");
+    }
   } catch (e) {}
 }
 
