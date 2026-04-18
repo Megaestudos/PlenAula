@@ -366,3 +366,71 @@ button.opt.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: 
 .input-pass input { width: 100%; padding-right: 80px; }
 .btn-show-pass { position: absolute; right: 10px; background: none; border: none; font-size: 12px; color: #777; display: flex; align-items: center; gap:4px; cursor:pointer; }
 .forgot-link { color: #1877F2; text-decoration: none; font-size: 13px; font-weight: 600; margin-top: 15px; }
+
+/* --- ESTILOS DE RESUMOS (GITHUB) --- */
+.study-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.resumo-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.resumo-card:hover {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-3px);
+}
+
+.resumo-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, var(--primary), #1E40AF);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2);
+}
+
+.resumo-info h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  text-align: left;
+}
+
+.resumo-info p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.resumo-action {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.resumo-card:hover .resumo-action {
+  color: var(--primary);
+  transform: translateX(3px);
+}
