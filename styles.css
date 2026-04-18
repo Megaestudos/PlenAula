@@ -334,10 +334,13 @@ button.opt.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: 
 .btn-pay { background: linear-gradient(135deg, #10B981 0%, #059669 100%); width: 100%; padding: 18px; font-size: 18px; box-shadow: 0 4px 15px rgba(16,185,129,0.3); border: none; color: white; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
 .btn-pay:hover { box-shadow: 0 6px 20px rgba(16,185,129,0.5); transform: translateY(-2px); }
 
-.app-timer-bar { background: rgba(239, 68, 68, 0.1); border-bottom: 1px solid rgba(239, 68, 68, 0.2); padding: 10px; text-align: center; color: var(--danger); font-weight: 700; font-size: 14px; position: sticky; top: 0; z-index: 101; display: none; justify-content: center; align-items: center; gap: 8px; }
+.app-timer-bar { background: linear-gradient(90deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.25) 100%); border: 1px solid rgba(239, 68, 68, 0.3); padding: 8px 24px; border-radius: 30px; text-align: center; color: #fca5a5; font-weight: 600; font-size: 13px; display: none; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.2); backdrop-filter: blur(10px); margin: 20px auto 0; width: fit-content; position: relative; z-index: 101; }
+.app-timer-bar i { font-size: 16px; color: #ef4444; }
+.app-timer-bar span { letter-spacing: 0.5px; }
 
 /* Profile display on app header */
 .profile-user-name { font-size: 14px; font-weight: 600; color: var(--text-muted); display: block; margin-top: 4px; }
+.elegant-name { color: var(--primary); font-size: 1.1em; background: var(--primary-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; text-transform: capitalize; }
 
 /* --- LOGIN MODAL --- */
 .login-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
