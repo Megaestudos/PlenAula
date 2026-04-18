@@ -190,19 +190,23 @@ async function renderStudies(){
   const container = document.getElementById('studyList');
   container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted)"><i class="ph ph-spinner-gap ph-spin" style="font-size:24px;"></i><br><br>Carregando conteúdos...</div>';
   try {
-    const res = await fetch(`${SCRIPT_URL}?action=getStudies`);
-    const js = await res.json();
-    if (js.ok && js.studies && js.studies.length){
+    const snap = await getFirestoreDb().collection('studies').where('ativo', '==', true).get();
+    
+    if (!snap.empty){
       container.innerHTML = '';
-      js.studies.forEach(s => {
+      snap.forEach(doc => {
+        const s = doc.data();
         const d = document.createElement('details'); d.className = 'summary';
         d.innerHTML = `<summary>${s.topico || 'Tópico'}</summary><div class="study-content">${linkify(s.conteudo || '')}</div>`;
         container.appendChild(d);
       });
     } else {
-      container.innerHTML = '<div style="text-align:center; padding:20px;"><i class="ph ph-empty"></i><br>Nenhum conteúdo.</div>';
+      container.innerHTML = '<div style="text-align:center; padding:20px;"><i class="ph ph-empty"></i><br>Nenhum conteúdo encontrado no banco de dados.</div>';
     }
-  } catch (e) { container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--danger)">Erro.</div>'; }
+  } catch (e) { 
+    console.error(e);
+    container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--danger)">Erro ao carregar dados do Firestore.</div>'; 
+  }
 }
 
 async function showTopicSelection(){
