@@ -242,32 +242,26 @@ button.opt.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: 
   .tabbtn i { font-size: 20px; }
   .deck { width: 100%; }
 
-  /* QUIZ MOBILE: tudo na tela sem scroll */
+  /* QUIZ MOBILE: card se adapta ao tamanho do conteúdo */
   .quiz-shell {
-    height: calc(100dvh - 90px);
-    gap: 10px;
-    overflow: hidden;
-  }
-  body.quiz-focus .quiz-shell {
-    height: calc(100dvh - 20px);
+    gap: 14px;
+    height: auto;
   }
   .quiz-active {
-    overflow: hidden;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    height: auto;
+  }
+  .quiz-main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
   }
   .progress-container { gap: 6px; margin-bottom: 8px; }
   .page-header-actions { padding: 14px; gap: 10px; }
   .btn-start { padding: 14px; }
   select { padding: 12px; }
-  .quiz-main {
-    flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
   .question-box { padding: 16px; border-radius: 14px; }
   .opts { gap: 10px; }
   button.opt { padding: 14px 16px; border-radius: 13px; }
