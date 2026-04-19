@@ -269,12 +269,12 @@ button.opt.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: 
     flex-direction: column;
     gap: 8px;
   }
-  .question-box { padding: 12px; border-radius: 12px; }
-  .topic-tag { font-size: 11px; margin-bottom: 6px; }
-  .q-text { font-size: 14px; line-height: 1.45; }
-  .opts { gap: 7px; }
-  button.opt { padding: 11px 14px; font-size: 14px; border-radius: 12px; gap: 8px; }
-  .quiz-footer { padding-top: 8px; }
+  .question-box { padding: 16px; border-radius: 14px; }
+  .topic-tag { font-size: 12px; margin-bottom: 8px; }
+  .q-text { font-size: 16px; line-height: 1.5; }
+  .opts { gap: 8px; }
+  button.opt { padding: 14px 16px; font-size: 15px; border-radius: 13px; gap: 10px; }
+  .quiz-footer { padding-top: 10px; }
   .timer-display { padding: 8px; font-size: 20px; margin-bottom: 8px; }
 }
 
