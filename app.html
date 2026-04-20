@@ -66,7 +66,7 @@
         </div>
 
         <div class="home-actions">
-          <button class="btn btn-primary" onclick="go('study')">
+          <button class="btn btn-primary" onclick="go('resumos')">
             <i class="ph ph-book-open"></i> <span>Estudar Leis</span>
           </button>
           <button class="btn btn-primary" onclick="go('quiz')">
@@ -111,11 +111,74 @@
       </section>
 
       <section id="resumos" class="page card">
-        <div class="page-top-bar">
-          <h3 class="page-title"><i class="ph ph-file-text"></i> Resumos Premium</h3>
-          <button class="btn-sm" onclick="go('home')"><i class="ph ph-arrow-left"></i> Voltar</button>
+
+        <!-- VIEW 1: Lista de Matérias -->
+        <div id="studyView" class="study-view">
+          <div class="page-top-bar">
+            <h3 class="page-title"><i class="ph ph-book-open"></i> Estudar Leis</h3>
+            <button class="btn-sm" onclick="go('home')"><i class="ph ph-arrow-left"></i> Voltar</button>
+          </div>
+          <div id="studyList" class="study-grid">Carregando conteúdos...</div>
         </div>
-        <div id="studyList" class="study-grid">Carregando conteúdos...</div>
+
+        <!-- VIEW 2: Escolha de tipo (Vídeo ou Áudio) -->
+        <div id="mediaPicker" class="study-view" style="display:none;">
+          <div class="page-top-bar">
+            <h3 class="page-title" id="mediaPickerTitle"><i class="ph ph-play-circle"></i> Matéria</h3>
+            <button class="btn-sm" onclick="backToSubjects()"><i class="ph ph-arrow-left"></i> Voltar</button>
+          </div>
+          <div class="media-type-grid">
+            <button class="media-type-btn video-btn" onclick="showMediaList('video')">
+              <div class="media-type-icon">
+                <i class="ph-fill ph-video"></i>
+              </div>
+              <div class="media-type-info">
+                <span class="media-type-label">Aulas em Vídeo</span>
+                <span class="media-type-count" id="videoCount">0 aulas disponíveis</span>
+              </div>
+              <i class="ph ph-arrow-right media-type-arrow"></i>
+            </button>
+            <button class="media-type-btn audio-btn" onclick="showMediaList('audio')">
+              <div class="media-type-icon audio-icon">
+                <i class="ph-fill ph-headphones"></i>
+              </div>
+              <div class="media-type-info">
+                <span class="media-type-label">Aulas em Áudio</span>
+                <span class="media-type-count" id="audioCount">0 aulas disponíveis</span>
+              </div>
+              <i class="ph ph-arrow-right media-type-arrow"></i>
+            </button>
+            <a id="resumoTextLink" href="#" target="_blank" class="media-type-btn resumo-btn">
+              <div class="media-type-icon resumo-icon-btn">
+                <i class="ph-fill ph-file-text"></i>
+              </div>
+              <div class="media-type-info">
+                <span class="media-type-label">Resumo em Texto</span>
+                <span class="media-type-count">Abrir material de apoio</span>
+              </div>
+              <i class="ph ph-arrow-up-right media-type-arrow"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- VIEW 3: Lista de mídias (Vídeos ou Áudios) -->
+        <div id="mediaListView" class="study-view" style="display:none;">
+          <div class="page-top-bar">
+            <h3 class="page-title" id="mediaListTitle"><i class="ph ph-video"></i> Vídeos</h3>
+            <button class="btn-sm" onclick="backToPicker()"><i class="ph ph-arrow-left"></i> Voltar</button>
+          </div>
+          <div id="mediaItemsList" class="media-items-list"></div>
+        </div>
+
+        <!-- VIEW 4: Player (Vídeo embutido ou Áudio) -->
+        <div id="mediaPlayerView" class="study-view" style="display:none;">
+          <div class="page-top-bar">
+            <h3 class="page-title" id="playerTitle" style="font-size:16px; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><i class="ph ph-play-circle"></i> Aula</h3>
+            <button class="btn-sm" onclick="backToMediaList()"><i class="ph ph-arrow-left"></i> Voltar</button>
+          </div>
+          <div id="playerContainer"></div>
+        </div>
+
       </section>
 
       <section id="quiz" class="page card">
@@ -197,10 +260,10 @@
       <i class="ph ph-house"></i>
       <span>Início</span>
     </button>
-    <a href="./Resumos/index.html" class="tabbtn">
+    <button class="tabbtn" data-target="resumos" onclick="go('resumos')">
       <i class="ph ph-book-open"></i>
       <span>Estudo</span>
-    </a>
+    </button>
     <button class="tabbtn" data-target="quiz" onclick="go('quiz')">
       <i class="ph ph-target"></i>
       <span>Simulado</span>
