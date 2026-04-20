@@ -462,3 +462,378 @@ button.opt.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: 
   color: var(--primary);
   transform: translateX(3px);
 }
+
+/* =====================================================
+   SISTEMA DE MÍDIA — ESTUDAR LEIS
+   ===================================================== */
+
+/* Transição entre views */
+.study-view {
+  animation: fadeSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- VIEW 2: Botões de tipo de mídia --- */
+.media-type-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.media-type-btn {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 20px 22px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  color: var(--text-main);
+  text-decoration: none;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.media-type-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 20px;
+}
+
+.video-btn::before  { background: linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(37,99,235,0.06) 100%); }
+.audio-btn::before  { background: linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(109,40,217,0.06) 100%); }
+.resumo-btn::before { background: linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(5,150,105,0.06) 100%); }
+
+.media-type-btn:hover::before  { opacity: 1; }
+.media-type-btn:hover          { border-color: rgba(255,255,255,0.18); transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.3); }
+.media-type-btn:active         { transform: scale(0.98); }
+
+.media-type-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--primary), #1E40AF);
+  color: white;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.media-type-icon.audio-icon {
+  background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
+
+.media-type-icon.resumo-icon-btn {
+  background: linear-gradient(135deg, #10B981, #059669);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+.media-type-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.media-type-label {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.media-type-count {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.media-type-arrow {
+  font-size: 20px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.media-type-btn:hover .media-type-arrow {
+  transform: translateX(4px);
+  color: var(--primary);
+}
+
+/* --- VIEW 3: Lista de itens de mídia --- */
+.media-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.media-item-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 12px 16px 12px 12px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.media-item-card:hover {
+  background: rgba(59,130,246,0.08);
+  border-color: rgba(59,130,246,0.25);
+  transform: translateX(4px);
+}
+
+.media-item-card:active { transform: scale(0.98); }
+
+.media-item-thumb {
+  position: relative;
+  width: 100px;
+  height: 64px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: var(--primary);
+}
+
+.media-item-thumb.audio-thumb {
+  color: #8B5CF6;
+  background: rgba(139,92,246,0.1);
+  border: 1px solid rgba(139,92,246,0.2);
+}
+
+.media-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.media-item-card:hover .media-play-overlay { opacity: 1; }
+
+.media-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.media-item-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.media-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.media-item-dur {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.media-item-arrow {
+  font-size: 18px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: 0.25s;
+}
+
+.media-item-card:hover .media-item-arrow {
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+/* --- VIEW 4: Player --- */
+.yt-player-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* ratio 16:9 */
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+}
+
+.yt-player-wrapper iframe,
+.yt-player-wrapper video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.player-info-box {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.player-subject-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.player-item-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.player-duration {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Player de Áudio */
+.audio-player-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.audio-player-art {
+  width: 180px;
+  height: 180px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #6D28D9 0%, #8B5CF6 50%, #A78BFA 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  color: rgba(255,255,255,0.9);
+  box-shadow: 0 20px 40px rgba(109,40,217,0.4);
+  animation: audioPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes audioPulse {
+  0%, 100% { box-shadow: 0 20px 40px rgba(109,40,217,0.4), 0 0 0 0 rgba(139,92,246,0.4); }
+  50%       { box-shadow: 0 20px 40px rgba(109,40,217,0.6), 0 0 0 20px rgba(139,92,246,0); }
+}
+
+.audio-player-info {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(139,92,246,0.06);
+  border: 1px solid rgba(139,92,246,0.15);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+audio {
+  accent-color: #8B5CF6;
+}
+
+/* Estado vazio */
+.media-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  text-align: center;
+  gap: 14px;
+  color: var(--text-muted);
+}
+
+.media-empty-state i {
+  font-size: 52px;
+  opacity: 0.4;
+}
+
+.media-empty-state h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.media-empty-state p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.media-empty-state strong {
+  color: var(--primary);
+}
+
+/* Mobile responsivo */
+@media (max-width: 600px) {
+  .media-type-btn { padding: 16px 18px; gap: 14px; }
+  .media-type-icon { width: 52px; height: 52px; font-size: 24px; border-radius: 14px; }
+  .media-type-label { font-size: 16px; }
+  .media-item-thumb { width: 80px; height: 52px; }
+  .audio-player-art { width: 140px; height: 140px; font-size: 56px; }
+}
